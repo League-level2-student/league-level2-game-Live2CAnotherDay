@@ -14,7 +14,7 @@ public class NyanUwuCatObstacle extends GameObject{
 		// TODO Auto-generated constructor stub
 		speed = 1;
 		if (needImage) {
-		    loadImage ("alien.png");
+		    loadImage ("");
 		}
 	}
 	

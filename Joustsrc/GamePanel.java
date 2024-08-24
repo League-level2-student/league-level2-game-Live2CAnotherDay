@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	Timer frameDraw;
 	Timer alienSpawn;
 	
-	Rocketship rocketShip = new Rocketship(250, 700, 50, 50);
+	JoustAdp joustAdp = new JoustAdp(250, 700, 50, 50);
 	ObjectManager objectManager = new ObjectManager(rocketShip);
 	public static BufferedImage image;
 	public static boolean needImage = true;

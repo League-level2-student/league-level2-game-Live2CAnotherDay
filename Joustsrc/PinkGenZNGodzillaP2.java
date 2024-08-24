@@ -4,12 +4,12 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class Rocketship extends GameObject{
+public class PinkGenZNGodzillaP2 extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
 	
-	public Rocketship(int x, int y, int width, int height) {
+	public PinkGenZNGozillaP2(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		speed = 10;
 		if(needImage) {
@@ -17,9 +17,6 @@ public class Rocketship extends GameObject{
 		}
 	}
 	
-	public Projectile getProjectile() {
-		return new Projectile(x+width/2, y, 10, 10);
-	}
 	
 	void draw(Graphics g) {
 		

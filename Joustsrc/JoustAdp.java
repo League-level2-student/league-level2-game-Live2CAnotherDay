@@ -3,8 +3,8 @@ import javax.swing.JFrame;
 public class JoustAdp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		JoustAdp invader = new JoustAdp();
-		invader.setup();
+		JoustAdp joustAdp = new JoustAdp();
+		joustAdp.setup();
 	}
 	
 	GamePanel gamePanel;

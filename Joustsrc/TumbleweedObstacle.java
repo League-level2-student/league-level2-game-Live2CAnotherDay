@@ -14,12 +14,19 @@ public class TumbleweedObstacle extends GameObject{
 		// TODO Auto-generated constructor stub
 		speed = 1;
 		if (needImage) {
-		    loadImage ("alien.png");
+		    loadImage ("TumbleweedObstacle, floor-1.png.png");
+		    loadImage ("TumbleweedObstacle, floor-2.png.png");
+		    loadImage ("TumbleweedObstacle, floor-3.png.png");
+		    loadImage ("TumbleweedObstacle, floor-4.png.png");
+		    loadImage ("TumbleweedObstacle, floor-5.png.png");
+		    loadImage ("TumbleweedObstacle, floor-6.png.png");
+		    loadImage ("TumbleweedObstacle, floor-7.png.png");
+		    loadImage ("TumbleweedObstacle, floor-8.png.png");
 		}
 	}
 	
 	void update() {
-		y += speed;
+		x += speed;
 		super.update();
 	}
 	
