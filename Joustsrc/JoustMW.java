@@ -1,10 +1,10 @@
 import javax.swing.JFrame;
 
-public class JoustAdp {
+public class JoustMW {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		JoustAdp joustAdp = new JoustAdp();
-		joustAdp.setup();
+		JoustMW MW = new JoustMW();
+		MW.setup();
 	}
 	
 	GamePanel gamePanel;
@@ -13,7 +13,7 @@ public class JoustAdp {
 	public static final int HEIGHT = 800;
 	
 	
-	public JoustAdp() {
+	public JoustMW() {
 		frame.getMaximumSize();
 		gamePanel = new GamePanel();
 	}
