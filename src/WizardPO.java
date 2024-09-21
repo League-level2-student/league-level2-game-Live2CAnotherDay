@@ -19,6 +19,7 @@ public class WizardPO extends GameObject{
 	public static boolean gotImage = false;	
 	Color color;
 	private boolean onGround = false;
+	private boolean jumpE = true;
 	public WizardPO(int x, int y, int width, int height, Color color) {
 		super(x, y, width, height);
 		speed = 10;
@@ -36,17 +37,37 @@ public class WizardPO extends GameObject{
 			onGround = true;
 			
 		}
-		if(!onGround) {
+		if(!onGround || !jumpE) {
 			y += yVelocity;
 			yVelocity += gravity;
+			jumpE = true;
 		}
+		while (y < 0) {
+			jumpE = false;
+			y = 0;
+		}
+		
 	}
 	
 	public void jump(){
-		yVelocity  = -10;
-		onGround = false;
+		if (jumpE) {
+			yVelocity  = -10;
+			onGround = false;
+		}
+		
+
+		
 	}
-//	
+
+	public void moveLeft(){
+		x -= 10;
+	}
+	
+	public void moveRight(){
+		x += 10;
+	}
+	
+	
 //	public Projectile getProjectile() {
 //		return new Projectile(x+width/2, y, 10, 10);
 //	}

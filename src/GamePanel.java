@@ -44,7 +44,7 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 //		System.out.println(e.getExtendedKeyCode());
 		// TODO Auto-generated method stub
 		if(e.getExtendedKeyCode() == KeyEvent.VK_W) {
-			System.out.println("jumped!");
+			System.out.println("Jumped!");
 			wizard.jump();
 		}
 	}
@@ -53,10 +53,12 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getExtendedKeyCode() == KeyEvent.VK_D) {
-			
+			System.out.println("Moved right!");
+			wizard.moveRight();
 		}
-		if(e.getExtendedKeyCode() == KeyEvent.VK_S) {
-			
+		if(e.getExtendedKeyCode() == KeyEvent.VK_A) {
+			System.out.println("Moved left!");
+			wizard.moveLeft();
 		}
 	}
 
