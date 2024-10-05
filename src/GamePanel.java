@@ -13,7 +13,8 @@ import javax.swing.Timer;
 class GamePanel extends JPanel implements KeyListener, ActionListener{
 	JFrame frame = new JFrame();
 	Timer timer;
-	WizardPO wizard = new WizardPO(0, 400, 50,50, Color.yellow);
+	WizardPO wizard = new WizardPO(100, 400, 50, 50, Color.yellow);
+	PinkGGPT pinkie = new PinkGGPT(1650, 400, 50, 50, Color.blue);
 	GamePanel(){
 		timer = new Timer(1000/60, this);
 		setPreferredSize(new Dimension(1800, 800));
@@ -31,41 +32,74 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		// TODO Auto-generated method stub
 		super.paintComponent(g);
 		wizard.draw(g);
+		pinkie.draw(g);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		this.repaint();
 		wizard.update();
+		pinkie.update();
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+
+		System.out.println(e.getExtendedKeyCode());
+		//System.out.println(e.getKeyChar());
 //		System.out.println(e.getExtendedKeyCode());
 		// TODO Auto-generated method stub
-		if(e.getExtendedKeyCode() == KeyEvent.VK_W) {
-			System.out.println("Jumped!");
-			wizard.jump();
-		}
+//		if(e.getExtendedKeyCode() == KeyEvent.VK_W) {
+//			System.out.println("P1 Jumped!");
+//			wizard.jump();
+//		}
+//		
+//		if(e.getExtendedKeyCode() == KeyEvent.VK_UP) {
+//			System.out.println("P2 Jumped!");
+//			pinkie.jump();
+//		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getExtendedKeyCode() == KeyEvent.VK_D) {
-			System.out.println("Moved right!");
+			System.out.println("P1 Moved right!");
 			wizard.moveRight();
+			wizard.dCounter++;
+			
 		}
 		if(e.getExtendedKeyCode() == KeyEvent.VK_A) {
-			System.out.println("Moved left!");
+			System.out.println("P1 Moved left!");
 			wizard.moveLeft();
+			wizard.dCounter++;
 		}
+		
+		if(e.getExtendedKeyCode() == KeyEvent.VK_RIGHT) {
+			System.out.println("P2 Moved right!");
+			pinkie.moveRight();
+			pinkie.dCounter++;
+		}
+		if(e.getExtendedKeyCode() == KeyEvent.VK_LEFT) {
+			System.out.println("P2 Moved left!");
+			pinkie.moveLeft();
+			pinkie.dCounter++;
+		}
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getExtendedKeyCode() == KeyEvent.VK_W) {
+			System.out.println("P1 Jumped!");
+			wizard.jump();
+		}
 		
+		if(e.getExtendedKeyCode() == KeyEvent.VK_UP) {
+			System.out.println("P2 Jumped!");
+			pinkie.jump();
+		}
+
 	}
 	
 	

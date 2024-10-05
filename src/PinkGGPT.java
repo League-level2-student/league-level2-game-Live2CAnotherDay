@@ -8,11 +8,12 @@ import java.awt.image.BufferedImage;
 //
 //import javax.imageio.ImageIO;
 //
-public class WizardPO extends GameObject{
+public class PinkGGPT extends GameObject{
 	
 	int yVelocity = -5;
 	int gravity = 1;
 	int dCounter = 0;
+
 
 	public static BufferedImage image;
 	public static boolean needImage = true;
@@ -20,7 +21,7 @@ public class WizardPO extends GameObject{
 	Color color;
 	private boolean onGround = false;
 	private boolean jumpE = true;
-	public WizardPO(int x, int y, int width, int height, Color color) {
+	public PinkGGPT(int x, int y, int width, int height, Color color) {
 		super(x, y, width, height);
 		speed = 10;
 		this.color = color;
@@ -47,8 +48,6 @@ public class WizardPO extends GameObject{
 			y = 0;
 		}
 		
-		
-		
 	}
 	
 	public void jump(){
@@ -68,7 +67,6 @@ public class WizardPO extends GameObject{
 		}else{
 			x -= 10;
 		}
-		
 	}
 	
 	public void moveRight(){
