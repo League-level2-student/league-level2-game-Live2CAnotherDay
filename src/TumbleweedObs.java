@@ -1,6 +1,24 @@
-//import java.awt.Color;
-//import java.awt.Graphics;
-//import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+public class TumbleweedObs extends GameObject{
+	
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;	
+	Color color;
+	private boolean onGround = false;
+	private boolean jumpE = true;
+	public TumbleweedObs(int x, int y, int width, int height, Color color) {
+		super(x, y, width, height);
+		speed = 10;
+		this.color = color;
+		if(needImage) {
+		//	loadImage("rocket.png");
+		}
+	}
+}
 //
 //import javax.imageio.ImageIO;
 //

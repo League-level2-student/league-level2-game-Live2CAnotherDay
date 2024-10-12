@@ -25,7 +25,7 @@ public class WizardPO extends GameObject{
 		speed = 10;
 		this.color = color;
 		if(needImage) {
-		//	loadImage("rocket.png");
+			loadImage("Wizard On Dino Idle-1.png.png");
 		}
 	}
 	
@@ -87,46 +87,26 @@ public class WizardPO extends GameObject{
 //	
 	void draw(Graphics g) {
 		
-//		if (gotImage) {
-//			g.drawImage(image, x, y, width, height, null);
-//			
-////			g.setColor(Color.red);
-////			g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
-//		} else {
+		if (gotImage) {
+			g.drawImage(image, x, y, width, height, null);
+			
+			g.setColor(Color.red);
+			g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
+		} else {
 			g.setColor(color);
 			g.fillRect(x, y, width, height);
-//		}
+		}
 	}
-//	
-//	public void right() {
-//		x+= speed;
-//		update();
-//	}
-//	
-//	public void left() {
-//		x-= speed;
-//		update();
-//	}
-//	
-//	public void up() {
-//		y-= speed;
-//		update();
-//	}
-//	
-//	public void down() {
-//		y+= speed;
-//		update();
-//	}
-//	
-//	void loadImage(String imageFile) {
-//		if(needImage) {
-//			try {
-//	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-//		    gotImage = true;
-//	        } catch (Exception e) {
-//	            
-//	        }
-//	        needImage = false;
-//		}
-//	}
+
+	void loadImage(String imageFile) {
+		if(needImage) {
+			try {
+	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage = false;
+		}
+	}
 }

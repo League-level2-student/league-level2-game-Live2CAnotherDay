@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+
 //import java.awt.Color;
 //import java.awt.Graphics;
 //import java.awt.image.BufferedImage;
@@ -26,6 +28,7 @@ public class PinkGGPT extends GameObject{
 		speed = 10;
 		this.color = color;
 		if(needImage) {
+			loadImage("Pink GenZ & Godzilla Idle-1.png (1).png");
 		//	loadImage("rocket.png");
 		}
 	}
@@ -85,46 +88,26 @@ public class PinkGGPT extends GameObject{
 //	
 	void draw(Graphics g) {
 		
-//		if (gotImage) {
-//			g.drawImage(image, x, y, width, height, null);
-//			
-////			g.setColor(Color.red);
-////			g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
-//		} else {
+		if (gotImage) {
+			g.drawImage(image, x, y, width, height, null);
+			
+			g.setColor(Color.red);
+			g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
+		} else {
 			g.setColor(color);
 			g.fillRect(x, y, width, height);
-//		}
+		}
 	}
-//	
-//	public void right() {
-//		x+= speed;
-//		update();
-//	}
-//	
-//	public void left() {
-//		x-= speed;
-//		update();
-//	}
-//	
-//	public void up() {
-//		y-= speed;
-//		update();
-//	}
-//	
-//	public void down() {
-//		y+= speed;
-//		update();
-//	}
-//	
-//	void loadImage(String imageFile) {
-//		if(needImage) {
-//			try {
-//	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-//		    gotImage = true;
-//	        } catch (Exception e) {
-//	            
-//	        }
-//	        needImage = false;
-//		}
-//	}
+
+	void loadImage(String imageFile) {
+		if(needImage) {
+			try {
+	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage = false;
+		}
+	}
 }
