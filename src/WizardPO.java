@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+
 //import java.awt.Color;
 //import java.awt.Graphics;
 //import java.awt.image.BufferedImage;
@@ -24,9 +26,9 @@ public class WizardPO extends GameObject{
 		super(x, y, width, height);
 		speed = 10;
 		this.color = color;
-		if(needImage) {
-			loadImage("Wizard On Dino Idle-1.png.png");
-		}
+//		if(needImage) {
+//			loadImage("Wizard On Dino Idle-1.png.png");
+//		}
 	}
 	
 	public void update() {
@@ -64,7 +66,7 @@ public class WizardPO extends GameObject{
 	public void moveLeft(){
 		if (dCounter % 3 == 0) {
 			x -= 100;
-			System.out.println("Dashed!");
+			System.out.println("P1 Dashed!");
 		}else{
 			x -= 10;
 		}
@@ -74,7 +76,7 @@ public class WizardPO extends GameObject{
 	public void moveRight(){
 		if (dCounter % 3 == 0) {
 			x += 100;
-			System.out.println("Dashed!");
+			System.out.println("P1 Dashed!");
 		}else{
 			x += 10;
 		}

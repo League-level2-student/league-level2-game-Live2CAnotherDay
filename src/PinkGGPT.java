@@ -66,7 +66,7 @@ public class PinkGGPT extends GameObject{
 	public void moveLeft(){
 		if (dCounter % 3 == 0) {
 			x -= 100;
-			System.out.println("Dashed!");
+			System.out.println("P2 Dashed!");
 		}else{
 			x -= 10;
 		}
@@ -75,7 +75,7 @@ public class PinkGGPT extends GameObject{
 	public void moveRight(){
 		if (dCounter % 3 == 0) {
 			x += 100;
-			System.out.println("Dashed!");
+			System.out.println("P2 Dashed!");
 		}else{
 			x += 10;
 		}

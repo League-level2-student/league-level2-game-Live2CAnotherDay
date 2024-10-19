@@ -11,10 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 class GamePanel extends JPanel implements KeyListener, ActionListener{
+	
 	JFrame frame = new JFrame();
 	Timer timer;
 	WizardPO wizard = new WizardPO(100, 400, 50, 50, Color.yellow);
 	PinkGGPT pinkie = new PinkGGPT(1650, 400, 50, 50, Color.blue);
+	NyanCatObs meowie = new NyanCatObs(-100, -100, 35, 35);
+	TumbleweedObs brownie = new TumbleweedObs(-100, -100, 35, 35, Color.BLACK);
+	
 	GamePanel(){
 		timer = new Timer(1000/60, this);
 		setPreferredSize(new Dimension(1800, 800));
@@ -33,6 +37,7 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		super.paintComponent(g);
 		wizard.draw(g);
 		pinkie.draw(g);
+		brownie.draw(g);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -40,6 +45,7 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		this.repaint();
 		wizard.update();
 		pinkie.update();
+		brownie.update();
 	}
 
 	@Override

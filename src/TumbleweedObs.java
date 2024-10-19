@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class TumbleweedObs extends GameObject{
 	
@@ -17,6 +18,38 @@ public class TumbleweedObs extends GameObject{
 		if(needImage) {
 		//	loadImage("rocket.png");
 		}
+	}
+	
+	void update() {
+		if (x < 1800) {
+			x += 10;
+			System.out.println("Spawn a Brownie On Left");
+			if(x > 1800) {
+				x = new Random().nextInt(1850)-50;
+				System.out.println("Spawn a Brownie Randomly");
+			}
+		}else if(x > 1800) {
+			x -= 10;
+			System.out.println("Spawn a Brownie On Right");
+			if(x < 0) {
+				x = new Random().nextInt(1850)-50;
+				System.out.println("Spawn a Brownie Randomly");
+			}
+		}
+		
+		if(y < 800) {
+			y += 25;
+		}
+		else if(y > 800 || y == 800){
+			y -= 25;
+		}
+	}
+
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		g.setColor(color);
+		g.fillRect(x, y, width, height);
+
 	}
 }
 //
