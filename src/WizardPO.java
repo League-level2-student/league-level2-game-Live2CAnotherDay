@@ -33,7 +33,7 @@ public class WizardPO extends GameObject{
 	
 	public void update() {
 		
-		
+		// Boundaries//
 		if (y > 740) {
 			y = 739;
 			onGround = true;
@@ -49,6 +49,11 @@ public class WizardPO extends GameObject{
 			y = 0;
 		}
 		
+		if (x < 0) {
+			x = 1;
+		}else if(x > 1750) {
+			x = 1749;
+		}
 		
 		
 	}

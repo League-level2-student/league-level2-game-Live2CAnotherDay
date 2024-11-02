@@ -9,8 +9,10 @@ public class TumbleweedObs extends GameObject{
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
 	Color color;
-	private boolean onGround = false;
-	private boolean jumpE = true;
+	Random rand = new Random();
+	int xSpeed = 25;
+	int ySpeed = 25;
+	private boolean bounce = false; 
 	public TumbleweedObs(int x, int y, int width, int height, Color color) {
 		super(x, y, width, height);
 		speed = 10;
@@ -18,32 +20,33 @@ public class TumbleweedObs extends GameObject{
 		if(needImage) {
 		//	loadImage("rocket.png");
 		}
+		respawn();
 	}
 	
 	void update() {
-		if (x < 1800) {
-			x += 10;
-			System.out.println("Spawn a Brownie On Left");
-			if(x > 1800) {
-				x = new Random().nextInt(1850)-50;
-				System.out.println("Spawn a Brownie Randomly");
-			}
-		}else if(x > 1800) {
-			x -= 10;
-			System.out.println("Spawn a Brownie On Right");
-			if(x < 0) {
-				x = new Random().nextInt(1850)-50;
-				System.out.println("Spawn a Brownie Randomly");
-			}
+		x += xSpeed;
+		
+		if(xSpeed > 0 && x > 1800) {
+			respawn();
+		}else if(xSpeed < 0 && x < 0){
+			respawn();
 		}
 		
-		if(y < 800) {
-			y += 25;
-		}
-		else if(y > 800 || y == 800){
-			y -= 25;
-		}
 	}
+	
+	void respawn() {
+		int xSpawn = rand.nextInt(1);
+		if (xSpawn == 0) {
+			x = -50;
+			xSpeed = Math.abs(xSpeed);
+		}else if (xSpawn == 1){
+			x = 1850;
+			xSpeed = -Math.abs(xSpeed);
+		}
+		y = rand.nextInt(500);
+	}
+	
+	
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub

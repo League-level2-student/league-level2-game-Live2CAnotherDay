@@ -51,6 +51,12 @@ public class PinkGGPT extends GameObject{
 			y = 0;
 		}
 		
+		if (x < 0) {
+			x = 1;
+		}else if(x > 1750) {
+			x = 1749;
+		}
+		
 	}
 	
 	public void jump(){
