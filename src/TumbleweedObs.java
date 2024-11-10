@@ -1,26 +1,44 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
+import javax.imageio.ImageIO;
 
 public class TumbleweedObs extends GameObject{
 	
-	public static BufferedImage image;
-	public static boolean needImage = true;
+	public static BufferedImage[] images = new BufferedImage[8];
+
 	public static boolean gotImage = false;	
 	Color color;
 	Random rand = new Random();
-	int xSpeed = 25;
-	int ySpeed = 25;
-	private boolean bounce = false; 
+	int frame = 0;
+	int xSpeed = 20;
+	int ySpeed = 0;
+	int gravity = 1;
+	
+	static {
+		loadImages();
+		
+	}
+	
 	public TumbleweedObs(int x, int y, int width, int height, Color color) {
 		super(x, y, width, height);
 		speed = 10;
 		this.color = color;
-		if(needImage) {
-		//	loadImage("rocket.png");
-		}
+		
 		respawn();
+	}
+	static void loadImages() {
+		for(int i = 1; i < 9; i ++) {
+			try {
+				images[i-1]= ImageIO.read(TumbleweedObs.class.getResourceAsStream("TWObs/tw"+ i + ".png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+            
 	}
 	
 	void update() {
@@ -32,18 +50,25 @@ public class TumbleweedObs extends GameObject{
 			respawn();
 		}
 		
+		if(y < 750){
+			y += ySpeed;
+			ySpeed += gravity;
+		}else if(y >= 750) {			
+			ySpeed = -25;
+			y += ySpeed;
+		}
 	}
 	
 	void respawn() {
-		int xSpawn = rand.nextInt(1);
+		int xSpawn = rand.nextInt(2);
 		if (xSpawn == 0) {
 			x = -50;
 			xSpeed = Math.abs(xSpeed);
 		}else if (xSpawn == 1){
 			x = 1850;
-			xSpeed = -Math.abs(xSpeed);
+			xSpeed = - Math.abs(xSpeed);
 		}
-		y = rand.nextInt(500);
+		y = rand.nextInt(275)+500;
 	}
 	
 	
@@ -51,8 +76,12 @@ public class TumbleweedObs extends GameObject{
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(color);
-		g.fillRect(x, y, width, height);
-
+		//g.fillRect(x, y, width, height);
+		g.drawImage(images[frame],x ,y, 75, 75, null);
+		frame ++;
+		if (frame == 8) {
+			frame = 0;
+		}
 	}
 }
 //
@@ -87,16 +116,6 @@ public class TumbleweedObs extends GameObject{
 //		}
 //	}
 //	
-//	void loadImage(String imageFile) {
-//	    if (needImage) {
-//	        try {
-//	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-//		    gotImage = true;
-//	        } catch (Exception e) {
-//	            
-//	        }
-//	        needImage = false;
-//	    }
-//	}
+
 //
 //}
