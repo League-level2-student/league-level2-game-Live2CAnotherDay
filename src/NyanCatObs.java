@@ -7,13 +7,14 @@ import javax.imageio.ImageIO;
 
 public class NyanCatObs extends GameObject{
 	
-	public static BufferedImage[] images = new BufferedImage[8];
+	public static BufferedImage[] images = new BufferedImage[10];
 	
 	public static boolean gotImage = false;	
 	Color color;
 	Random rand = new Random();
-	int xSpeed = 30; 
+	int xSpeed = 25; 
 	int frame = 0;
+	int side = 0;
 	
 	static {
 		loadImages();
@@ -28,14 +29,32 @@ public class NyanCatObs extends GameObject{
 	}
 	
 	static void loadImages() {
-		for(int i = 1; i < 9; i ++) {
+		
+		for(int i = 1; i < 6; i ++) {
+				
 			try {
-				images[i-1]= ImageIO.read(NyanCatObs.class.getResourceAsStream("NUCObs/NUC"+ i + ".png"));
+				images[i-1]= ImageIO.read(NyanCatObs.class.getResourceAsStream("UNCObs/unc"+ i + ".png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+					e.printStackTrace();
 			}
 		}
+		
+		for(int i = 6; i < 10; i ++) {
+			
+			try {
+				images[i-1]= ImageIO.read(NyanCatObs.class.getResourceAsStream("UNCFObs/uncf"+ (i-5) + ".png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		}
+		
+			
+
+		
+		
+		
 	}
 
 
@@ -56,9 +75,12 @@ public class NyanCatObs extends GameObject{
 		if (xSpawn == 0) {
 			x = -50;
 			xSpeed = Math.abs(xSpeed);
+			side = 0;
+			
 		}else if (xSpawn == 1){
 			x = 1850;
 			xSpeed = - Math.abs(xSpeed);
+			side = 1;
 		}
 		y = rand.nextInt(450);
 	}
@@ -69,11 +91,20 @@ public class NyanCatObs extends GameObject{
 		// TODO Auto-generated method stub
 		g.setColor(color);
 		//g.fillRect(x, y, width, height);
-		g.drawImage(images[frame],x ,y, 50, 50, null);
-		frame ++;
-		if (frame == 8) {
-			frame = 0;
+		if(side == 0) {
+			g.drawImage(images[frame],x ,y, 100, 50, null);
+			frame ++;
+			if (frame == 5) {
+				frame = 0;
+			}
+		}else {
+			g.drawImage(images[frame+5],x ,y, 100, 50, null);
+			frame ++;
+			if (frame == 5) {
+				frame = 0;
+			}
 		}
+		
 
 	}
 }

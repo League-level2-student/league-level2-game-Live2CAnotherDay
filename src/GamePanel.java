@@ -17,7 +17,7 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 
 	WizardPO wizard = new WizardPO(100, 400, 50, 50, Color.yellow);
 	PinkGGPT pinkie = new PinkGGPT(1650, 400, 50, 50, Color.blue);
-	NyanCatObs meowie = new NyanCatObs(-100, -100, 35, 35, Color.pink);
+	NyanCatObs meowie = new NyanCatObs(-100, -100, 80, 40, Color.pink);
 	TumbleweedObs brownie = new TumbleweedObs(-100, -100, 35, 35, Color.BLACK);
 	
 	GamePanel(){
