@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -16,20 +17,43 @@ public class WizardPO extends GameObject{
 	int gravity = 1;
 	int dCounter = 0;
 
-	public static BufferedImage image;
-	public static boolean needImage = true;
-	public static boolean gotImage = false;	
+	public static BufferedImage[] images = new BufferedImage[6];
 	Color color;
 	private boolean onGround = false;
 	private boolean jumpE = true;
+	
+	static {
+		loadImages();
+	}
+	
 	public WizardPO(int x, int y, int width, int height, Color color) {
 		super(x, y, width, height);
 		speed = 10;
 		this.color = color;
-//		if(needImage) {
-//			loadImage("Wizard On Dino Idle-1.png.png");
-//		}
+
 	}
+	
+	static void loadImages() {
+		
+		for(int i = 1; i < 3; i ++) {
+				
+			try {
+				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("WODIP/unc"+ i + ".png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		}
+		
+		for(int i = 3; i < 7; i ++) {
+			
+			try {
+				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("WODJP/uncf"+ (i-5) + ".png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		}
 	
 	public void update() {
 		
@@ -88,10 +112,6 @@ public class WizardPO extends GameObject{
 	}
 	
 	
-//	public Projectile getProjectile() {
-//		return new Projectile(x+width/2, y, 10, 10);
-//	}
-//	
 	void draw(Graphics g) {
 		
 		if (gotImage) {
@@ -117,3 +137,5 @@ public class WizardPO extends GameObject{
 		}
 	}
 }
+
+	
