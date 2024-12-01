@@ -16,6 +16,8 @@ public class WizardPO extends GameObject{
 	int yVelocity = -5;
 	int gravity = 1;
 	int dCounter = 0;
+	int frame = 0;
+	int side = 0;
 
 	public static BufferedImage[] images = new BufferedImage[6];
 	Color color;
@@ -38,7 +40,7 @@ public class WizardPO extends GameObject{
 		for(int i = 1; i < 3; i ++) {
 				
 			try {
-				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("WODIP/unc"+ i + ".png"));
+				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("WODIP/wodp"+ i + ".png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -48,12 +50,13 @@ public class WizardPO extends GameObject{
 		for(int i = 3; i < 7; i ++) {
 			
 			try {
-				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("WODJP/uncf"+ (i-5) + ".png"));
+				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("WODJP/wodjp"+ (i-5) + ".png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 					e.printStackTrace();
 			}
 		}
+	}
 	
 	public void update() {
 		
@@ -112,30 +115,28 @@ public class WizardPO extends GameObject{
 	}
 	
 	
-	void draw(Graphics g) {
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		g.setColor(color);
+		//g.fillRect(x, y, width, height);
+		if(side == 0) {
+			g.drawImage(images[frame/3],x ,y, 100, 50, null);
+			frame ++;
+			if (frame == 12) {
+				frame = 0;
+			}
+		}else {
+			g.drawImage(images[(frame/3)+5],x ,y, 100, 50, null);
+			frame ++;
+			if (frame == 12) {
+				frame = 0;
+			}
+		}
 		
-		if (gotImage) {
-			g.drawImage(image, x, y, width, height, null);
-			
-			g.setColor(Color.red);
-			g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
-		} else {
-			g.setColor(color);
-			g.fillRect(x, y, width, height);
-		}
-	}
 
-	void loadImage(String imageFile) {
-		if(needImage) {
-			try {
-	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-		    gotImage = true;
-	        } catch (Exception e) {
-	            
-	        }
-	        needImage = false;
-		}
 	}
+	
+	
 }
 
 	
