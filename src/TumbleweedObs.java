@@ -44,16 +44,16 @@ public class TumbleweedObs extends GameObject{
 	void update() {
 		x += xSpeed;
 		
-		if(xSpeed > 0 && x > 1800) {
+		if(xSpeed > 0 && x > 2000) {
 			respawn();
 		}else if(xSpeed < 0 && x < 0){
 			respawn();
 		}
 		
-		if(y < 750){
+		if(y < 885){
 			y += ySpeed;
 			ySpeed += gravity;
-		}else if(y >= 750) {			
+		}else if(y >= 885) {			
 			ySpeed = -25;
 			y += ySpeed;
 		}
@@ -62,13 +62,13 @@ public class TumbleweedObs extends GameObject{
 	void respawn() {
 		int xSpawn = rand.nextInt(2);
 		if (xSpawn == 0) {
-			x = -50;
+			x = -55;
 			xSpeed = Math.abs(xSpeed);
 		}else if (xSpawn == 1){
-			x = 1850;
+			x = 1955;
 			xSpeed = - Math.abs(xSpeed);
 		}
-		y = rand.nextInt(275)+500;
+		y = rand.nextInt(275)+700;
 	}
 	
 	
@@ -77,7 +77,7 @@ public class TumbleweedObs extends GameObject{
 		// TODO Auto-generated method stub
 		g.setColor(color);
 		//g.fillRect(x, y, width, height);
-		g.drawImage(images[frame],x ,y, 75, 75, null);
+		g.drawImage(images[frame],x ,y, 55, 55, null);
 		frame ++;
 		if (frame == 8) {
 			frame = 0;

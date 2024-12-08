@@ -18,6 +18,7 @@ public class WizardPO extends GameObject{
 	int dCounter = 0;
 	int frame = 0;
 	int side = 0;
+	int opp = 0;
 
 	public static BufferedImage[] images = new BufferedImage[6];
 	Color color;
@@ -50,7 +51,7 @@ public class WizardPO extends GameObject{
 		for(int i = 3; i < 7; i ++) {
 			
 			try {
-				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("WODJP/wodjp"+ (i-5) + ".png"));
+				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("WODJP/wodjp"+ (i-2) + ".png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -61,8 +62,8 @@ public class WizardPO extends GameObject{
 	public void update() {
 		
 		// Boundaries//
-		if (y > 740) {
-			y = 739;
+		if (y > 850) {
+			y = 849;
 			onGround = true;
 			
 		}
@@ -76,10 +77,10 @@ public class WizardPO extends GameObject{
 			y = 0;
 		}
 		
-		if (x < 0) {
-			x = 1;
-		}else if(x > 1750) {
-			x = 1749;
+		if (x < 150) {
+			x = 151;
+		}else if(x > 1850) {
+			x = 1849;
 		}
 		
 		
@@ -96,22 +97,23 @@ public class WizardPO extends GameObject{
 	}
 
 	public void moveLeft(){
-		if (dCounter % 3 == 0) {
-			x -= 100;
-			System.out.println("P1 Dashed!");
-		}else{
-			x -= 10;
+		if (opp == 0) {
+			x += 100;
 		}
+		
+			x -= 20;
+			opp = 1;
+		
 		
 	}
 	
 	public void moveRight(){
-		if (dCounter % 3 == 0) {
-			x += 100;
-			System.out.println("P1 Dashed!");
-		}else{
-			x += 10;
+		if(opp == 1) {
+			x -= 100;
 		}
+			x += 20;
+			opp = 0;
+		
 	}
 	
 	
@@ -119,14 +121,31 @@ public class WizardPO extends GameObject{
 		// TODO Auto-generated method stub
 		g.setColor(color);
 		//g.fillRect(x, y, width, height);
-		if(side == 0) {
-			g.drawImage(images[frame/3],x ,y, 100, 50, null);
+		if(side == 0 && onGround == true) {
+		
+			if(opp == 0) {
+				g.drawImage(images[frame/3],x ,y, 100, 100, null);
+				g.drawString("Player 1", x + 13, y - 2);
+			}else {
+				g.drawImage(images[frame/3],x ,y, -100, 100, null);
+				g.drawString("Player 1", x - 50, y - 2);
+			}
+			
 			frame ++;
+			
 			if (frame == 12) {
 				frame = 0;
 			}
+			
 		}else {
-			g.drawImage(images[(frame/3)+5],x ,y, 100, 50, null);
+			if(opp == 0) {
+				g.drawImage(images[frame/3+2],x ,y, 100, 100, null);
+				g.drawString("Player 1", x + 13, y - 2);
+			}else {
+				g.drawImage(images[frame/3+2],x ,y, -100, 100, null);
+				g.drawString("Player 1", x - 50, y - 2);
+			}
+			
 			frame ++;
 			if (frame == 12) {
 				frame = 0;

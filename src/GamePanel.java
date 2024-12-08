@@ -15,15 +15,15 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	JFrame frame = new JFrame();
 	Timer timer;
 
-	WizardPO wizard = new WizardPO(100, 400, 50, 50, Color.yellow);
-	PinkGGPT pinkie = new PinkGGPT(1650, 400, 50, 50, Color.blue);
-	NyanCatObs meowie = new NyanCatObs(-100, -100, 120, 80, Color.pink);
+	WizardPO wizard = new WizardPO(100, 400, 50, 50, Color.green);
+	PinkGGPT pinkie = new PinkGGPT(1650, 400, 50, 50, Color.pink);
+	NyanCatObs meowie = new NyanCatObs(-100, -100, 120, 80, Color.blue);
 	TumbleweedObs brownie = new TumbleweedObs(-100, -100, 35, 35, Color.BLACK);
 	
 	GamePanel(){
 		timer = new Timer(1000/60, this);
 	
-		setPreferredSize(new Dimension(1800, 800));
+		setPreferredSize(new Dimension(2000, 1000));
 		frame.add(this);
 		frame.pack();
 		frame.addKeyListener(this);

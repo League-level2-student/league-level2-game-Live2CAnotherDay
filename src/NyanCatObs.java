@@ -61,9 +61,9 @@ public class NyanCatObs extends GameObject{
 	void update() {
 		x += xSpeed;
 
-		if(xSpeed > 0 && x > 1800) {
+		if(xSpeed > 0 && x > 2000) {
 			respawn();
-		}else if(xSpeed < 0 && x < 0){
+		}else if(xSpeed < 0 && x < -120){
 			respawn();
 		}
 
@@ -73,16 +73,16 @@ public class NyanCatObs extends GameObject{
 		
 		int xSpawn = rand.nextInt(2);
 		if (xSpawn == 0) {
-			x = -50;
+			x = -120;
 			xSpeed = Math.abs(xSpeed);
 			side = 0;
 			
 		}else if (xSpawn == 1){
-			x = 1850;
+			x = 2120;
 			xSpeed = - Math.abs(xSpeed);
 			side = 1;
 		}
-		y = rand.nextInt(450);
+		y = rand.nextInt(475);
 	}
 
 
@@ -92,13 +92,13 @@ public class NyanCatObs extends GameObject{
 		g.setColor(color);
 		//g.fillRect(x, y, width, height);
 		if(side == 0) {
-			g.drawImage(images[frame/3],x ,y, 100, 50, null);
+			g.drawImage(images[frame/3],x ,y, 120, 55, null);
 			frame ++;
 			if (frame == 12) {
 				frame = 0;
 			}
 		}else {
-			g.drawImage(images[(frame/3)+5],x ,y, 100, 50, null);
+			g.drawImage(images[(frame/3)+5],x ,y, 120, 55, null);
 			frame ++;
 			if (frame == 12) {
 				frame = 0;

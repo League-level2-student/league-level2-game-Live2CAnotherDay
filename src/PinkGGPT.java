@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -15,29 +16,54 @@ public class PinkGGPT extends GameObject{
 	int yVelocity = -5;
 	int gravity = 1;
 	int dCounter = 0;
+	int frame = 0;
+	int side = 0;
+	int opp = 0;
 
 
-	public static BufferedImage image;
-	public static boolean needImage = true;
-	public static boolean gotImage = false;	
+	public static BufferedImage[] images = new BufferedImage[10];
 	Color color;
 	private boolean onGround = false;
 	private boolean jumpE = true;
+	
+	static {
+		loadImages();
+	}
+	
 	public PinkGGPT(int x, int y, int width, int height, Color color) {
 		super(x, y, width, height);
 		speed = 10;
 		this.color = color;
-		if(needImage) {
-			loadImage("Pink GenZ & Godzilla Idle-1.png (1).png");
-		//	loadImage("rocket.png");
+		
+	}
+	
+	static void loadImages() {
+		for(int i = 1; i < 4; i ++) {
+			
+			try {
+				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("PGNGP/pgngp"+ i + ".png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		}
+		
+		for(int i = 4; i < 11; i ++) {
+			
+			try {
+				images[i-1]= ImageIO.read(WizardPO.class.getResourceAsStream("PGNGJP/pgngjp"+ (i-3) + ".png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
 		}
 	}
 	
-	public void update() {
+public void update() {
 		
-		
-		if (y > 740) {
-			y = 739;
+		// Boundaries//
+		if (y > 850) {
+			y = 849;
 			onGround = true;
 			
 		}
@@ -51,11 +77,12 @@ public class PinkGGPT extends GameObject{
 			y = 0;
 		}
 		
-		if (x < 0) {
-			x = 1;
-		}else if(x > 1750) {
-			x = 1749;
+		if (x < 150) {
+			x = 151;
+		}else if(x > 1850) {
+			x = 1849;
 		}
+		
 		
 	}
 	
@@ -70,21 +97,21 @@ public class PinkGGPT extends GameObject{
 	}
 
 	public void moveLeft(){
-		if (dCounter % 3 == 0) {
+		if (opp == 1) {
 			x -= 100;
-			System.out.println("P2 Dashed!");
-		}else{
-			x -= 10;
 		}
+			x -= 20;
+			opp = 0;
+		
 	}
 	
 	public void moveRight(){
-		if (dCounter % 3 == 0) {
+		if (opp == 0) {
 			x += 100;
-			System.out.println("P2 Dashed!");
-		}else{
-			x += 10;
 		}
+			x += 20;
+			opp = 1;
+		
 	}
 	
 	
@@ -93,27 +120,42 @@ public class PinkGGPT extends GameObject{
 //	}
 //	
 	void draw(Graphics g) {
-		
-		if (gotImage) {
-			g.drawImage(image, x, y, width, height, null);
-			
-			g.setColor(Color.red);
-			g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
-		} else {
-			g.setColor(color);
-			g.fillRect(x, y, width, height);
-		}
-	}
+		// TODO Auto-generated method stub
+				g.setColor(color);
+				
+				//g.fillRect(x, y, width, height);
+				if(side == 0 && onGround == true) {
+				
+					if(opp == 0) {
+						g.drawImage(images[frame/3],x ,y, 100, 100, null);
+						g.drawString("Player 2", x + 33, y - 1);
+					}else {
+						g.drawImage(images[frame/3],x ,y, -100, 100, null);
+						g.drawString("Player 2", x - 99, y - 1);
+					}
+					
+					frame ++;
+					
+					if (frame == 12) {
+						frame = 0;
+					}
+					
+				}else {
+					if(opp == 0) {
+						g.drawImage(images[frame/3+3],x ,y, 100, 100, null);
+						g.drawString("Player 2", x + 33, y - 1);
+					}else {
+						g.drawImage(images[frame/3+3],x ,y, -100, 100, null);
+						g.drawString("Player 2", x - 99, y - 1);
+					}
+					
+					frame ++;
+					if (frame == 12) {
+						frame = 0;
+					}
+				}
+				
 
-	void loadImage(String imageFile) {
-		if(needImage) {
-			try {
-	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-		    gotImage = true;
-	        } catch (Exception e) {
-	            
-	        }
-	        needImage = false;
-		}
-	}
+			}
 }
+
