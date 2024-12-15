@@ -59,7 +59,7 @@ public class PinkGGPT extends GameObject{
 		}
 	}
 	
-public void update() {
+	public void update() {
 		
 		// Boundaries//
 		if (y > 850) {
@@ -83,7 +83,7 @@ public void update() {
 			x = 1849;
 		}
 		
-		
+		super.update();
 	}
 	
 	public void jump(){
@@ -103,6 +103,7 @@ public void update() {
 			x -= 20;
 			opp = 0;
 		
+			super.update();
 	}
 	
 	public void moveRight(){
@@ -112,16 +113,19 @@ public void update() {
 			x += 20;
 			opp = 1;
 		
+			super.update();
 	}
 	
-	
-//	public Projectile getProjectile() {
-//		return new Projectile(x+width/2, y, 10, 10);
-//	}
-//	
+
 	void draw(Graphics g) {
 		// TODO Auto-generated method stub
-				g.setColor(color);
+				
+				g.setColor(Color.black);
+				g.drawRect(x, y, 1, 20);
+				
+			g.setColor(color);
+				
+				
 				
 				//g.fillRect(x, y, width, height);
 				if(side == 0 && onGround == true) {

@@ -66,6 +66,8 @@ public class NyanCatObs extends GameObject{
 		}else if(xSpeed < 0 && x < -120){
 			respawn();
 		}
+		
+		super.update();
 
 	}
 
@@ -83,6 +85,8 @@ public class NyanCatObs extends GameObject{
 			side = 1;
 		}
 		y = rand.nextInt(475);
+		
+		super.update();
 	}
 
 

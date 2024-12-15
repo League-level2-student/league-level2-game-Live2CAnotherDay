@@ -83,7 +83,7 @@ public class WizardPO extends GameObject{
 			x = 1849;
 		}
 		
-		
+		super.update();
 	}
 	
 	public void jump(){
@@ -104,6 +104,7 @@ public class WizardPO extends GameObject{
 			x -= 20;
 			opp = 1;
 		
+		super.update();
 		
 	}
 	
@@ -113,12 +114,17 @@ public class WizardPO extends GameObject{
 		}
 			x += 20;
 			opp = 0;
-		
+			
+		super.update();
 	}
 	
 	
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		
+		g.setColor(Color.black);
+		g.drawRect(x, y, 1, 20);
+		
 		g.setColor(color);
 		//g.fillRect(x, y, width, height);
 		if(side == 0 && onGround == true) {

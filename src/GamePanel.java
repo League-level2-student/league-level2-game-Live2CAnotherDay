@@ -50,52 +50,38 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		wizard.update();
 		pinkie.update();
 		brownie.update();
-		
-		
-			meowie.update();
+		meowie.update();
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 
-		System.out.println(e.getExtendedKeyCode());
-		//System.out.println(e.getKeyChar());
-//		System.out.println(e.getExtendedKeyCode());
-		// TODO Auto-generated method stub
-//		if(e.getExtendedKeyCode() == KeyEvent.VK_W) {
-//			System.out.println("P1 Jumped!");
-//			wizard.jump();
-//		}
-//		
-//		if(e.getExtendedKeyCode() == KeyEvent.VK_UP) {
-//			System.out.println("P2 Jumped!");
-//			pinkie.jump();
-//		}
+		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getExtendedKeyCode() == KeyEvent.VK_D) {
-			System.out.println("P1 Moved right!");
+			//System.out.println("P1 Moved right!");
 			wizard.moveRight();
 			wizard.dCounter++;
 			
 		}
 		if(e.getExtendedKeyCode() == KeyEvent.VK_A) {
-			System.out.println("P1 Moved left!");
+			//System.out.println("P1 Moved left!");
 			wizard.moveLeft();
 			wizard.dCounter++;
 		}
 		
 		if(e.getExtendedKeyCode() == KeyEvent.VK_RIGHT) {
-			System.out.println("P2 Moved right!");
+			//System.out.println("P2 Moved right!");
 			pinkie.moveRight();
 			pinkie.dCounter++;
 		}
 		if(e.getExtendedKeyCode() == KeyEvent.VK_LEFT) {
-			System.out.println("P2 Moved left!");
+			//System.out.println("P2 Moved left!");
 			pinkie.moveLeft();
 			pinkie.dCounter++;
 		}
@@ -105,12 +91,12 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getExtendedKeyCode() == KeyEvent.VK_W) {
-			System.out.println("P1 Jumped!");
+			//System.out.println("P1 Jumped!");
 			wizard.jump();
 		}
 		
 		if(e.getExtendedKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("P2 Jumped!");
+			//System.out.println("P2 Jumped!");
 			pinkie.jump();
 		}
 

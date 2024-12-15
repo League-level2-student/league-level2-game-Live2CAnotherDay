@@ -57,6 +57,8 @@ public class TumbleweedObs extends GameObject{
 			ySpeed = -25;
 			y += ySpeed;
 		}
+		
+		super.update();
 	}
 	
 	void respawn() {
@@ -69,6 +71,8 @@ public class TumbleweedObs extends GameObject{
 			xSpeed = - Math.abs(xSpeed);
 		}
 		y = rand.nextInt(275)+700;
+		
+		super.update();
 	}
 	
 	
