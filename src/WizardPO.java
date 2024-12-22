@@ -130,10 +130,10 @@ public class WizardPO extends GameObject{
 		if(side == 0 && onGround == true) {
 		
 			if(opp == 0) {
-				g.drawImage(images[frame/3],x ,y, 100, 100, null);
+				g.drawImage(images[frame/3], x, y , 100, 100, null);
 				g.drawString("Player 1", x + 13, y - 2);
 			}else {
-				g.drawImage(images[frame/3],x ,y, -100, 100, null);
+				g.drawImage(images[frame/3], x, y , -100, 100, null);
 				g.drawString("Player 1", x - 50, y - 2);
 			}
 			
@@ -145,11 +145,11 @@ public class WizardPO extends GameObject{
 			
 		}else {
 			if(opp == 0) {
-				g.drawImage(images[frame/3+2],x ,y, 100, 100, null);
+				g.drawImage(images[frame/3+2], x, y, 100, 100, null);
 				g.drawString("Player 1", x + 13, y - 2);
 			}else {
-				g.drawImage(images[frame/3+2],x ,y, -100, 100, null);
-				g.drawString("Player 1", x - 50, y - 2);
+				g.drawImage(images[frame/3+2], x, y, -100, 100, null);
+				g.drawString("Player 1", x, y - 2);
 			}
 			
 			frame ++;

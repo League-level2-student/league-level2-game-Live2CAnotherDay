@@ -18,7 +18,7 @@ public class PinkGGPT extends GameObject{
 	int dCounter = 0;
 	int frame = 0;
 	int side = 0;
-	int opp = 0;
+	int opp = 1;
 
 
 	public static BufferedImage[] images = new BufferedImage[10];
