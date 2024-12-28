@@ -14,15 +14,16 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	
 	JFrame frame = new JFrame();
 	Timer timer;
+	ObjectManager oM;
 
-	WizardPO wizard = new WizardPO(100, 400, 50, 50, Color.green);
-	PinkGGPT pinkie = new PinkGGPT(1650, 400, 50, 50, Color.pink);
+	WizardPO wizard = new WizardPO(100, 650, 50, 50, Color.green);
+	PinkGGPT pinkie = new PinkGGPT(1650, 650, 50, 50, Color.pink);
 	NyanCatObs meowie = new NyanCatObs(-100, -100, 120, 80, Color.blue);
 	TumbleweedObs brownie = new TumbleweedObs(-100, -100, 35, 35, Color.BLACK);
 	
 	GamePanel(){
 		timer = new Timer(1000/60, this);
-	
+		oM = new ObjectManager(wizard, pinkie, meowie, brownie);
 		setPreferredSize(new Dimension(2000, 1000));
 		frame.add(this);
 		frame.pack();
@@ -30,8 +31,6 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		timer.start();
-
-		
 	}
 	
 	@Override
@@ -51,6 +50,7 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		pinkie.update();
 		brownie.update();
 		meowie.update();
+		oM.update();
 		
 	}
 

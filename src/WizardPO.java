@@ -157,11 +157,7 @@ public class WizardPO extends GameObject{
 				frame = 0;
 			}
 		}
-		
-
 	}
-	
-	
 }
 
 	
