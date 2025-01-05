@@ -96,18 +96,20 @@ public class NyanCatObs extends GameObject{
 		g.setColor(color);
 		//g.fillRect(x, y, width, height);
 		if(side == 0) {
-			g.drawImage(images[frame/3],x ,y, 120, 55, null);
+			g.drawImage(images[frame/3],x ,y, width, height, null);
 			frame ++;
 			if (frame == 12) {
 				frame = 0;
 			}
 		}else {
-			g.drawImage(images[(frame/3)+5],x ,y, 120, 55, null);
+			g.drawImage(images[(frame/3)+5],x ,y, width, height, null);
 			frame ++;
 			if (frame == 12) {
 				frame = 0;
 			}
 		}
+		g.setColor(Color.PINK);
+		g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 		
 
 	}

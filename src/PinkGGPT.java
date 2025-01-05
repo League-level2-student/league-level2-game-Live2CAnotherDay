@@ -94,20 +94,20 @@ public class PinkGGPT extends GameObject {
 	}
 
 	public void moveLeft() {
-		if (opp == 1) {
-			x -= 100;
+		if (opp == 0) {
+			x -= 20;
 		}
-		x -= 20;
+//		x -= 20;
 		opp = 0;
 
 		super.update();
 	}
 
 	public void moveRight() {
-		if (opp == 0) {
-			x += 100;
+		if (opp == 1) {
+			x += 20;
 		}
-		x += 20;
+		//x += 20;
 		opp = 1;
 
 		super.update();
@@ -125,11 +125,11 @@ public class PinkGGPT extends GameObject {
 		if (side == 0 && onGround == true) {
 
 			if (opp == 0) {
-				g.drawImage(images[frame / 3], x, y, 100, 100, null);
-				g.drawString("Player 2", x + 33, y - 1);
+				g.drawImage(images[frame / 3], x, y, width, height, null);
+				g.drawString("Player 2", x + 36, y - 1);
 			} else {
-				g.drawImage(images[frame / 3], x, y, -100, 100, null);
-				g.drawString("Player 2", x - 99, y - 1);
+				g.drawImage(images[frame / 3], x + width, y, -width, height, null);
+				g.drawString("Player 2", x + 14, y - 1);
 			}
 
 			frame++;
@@ -140,11 +140,11 @@ public class PinkGGPT extends GameObject {
 
 		} else {
 			if (opp == 0) {
-				g.drawImage(images[frame / 3 + 3], x, y, 100, 100, null);
-				g.drawString("Player 2", x + 33, y - 1);
+				g.drawImage(images[frame / 3 + 3], x, y, width, height, null);
+				g.drawString("Player 2", x + 36, y - 1);
 			} else {
-				g.drawImage(images[frame / 3 + 3], x, y, -100, 100, null);
-				g.drawString("Player 2", x - 99, y - 1);
+				g.drawImage(images[frame / 3 + 3], x + width, y, -width, height, null);
+				g.drawString("Player 2", x + 14, y - 1);
 			}
 
 			frame++;
@@ -152,5 +152,7 @@ public class PinkGGPT extends GameObject {
 				frame = 0;
 			}
 		}
+		g.setColor(Color.RED);
+		g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 	}
 }

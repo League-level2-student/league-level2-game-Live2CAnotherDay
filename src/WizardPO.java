@@ -96,25 +96,23 @@ public class WizardPO extends GameObject{
 		
 	}
 
-	public void moveLeft(){
-		if (opp == 0) {
-			x += 100;
-		}
-		
+	public void moveLeft() {
+		if (opp == 1) {
 			x -= 20;
-			opp = 1;
-		
-		super.update();
-		
-	}
-	
-	public void moveRight(){
-		if(opp == 1) {
-			x -= 100;
 		}
+//		x -= 20;
+		opp = 1;
+
+		super.update();
+	}
+
+	public void moveRight() {
+		if (opp == 0) {
 			x += 20;
-			opp = 0;
-			
+		}
+		//x += 20;
+		opp = 0;
+
 		super.update();
 	}
 	
@@ -130,11 +128,11 @@ public class WizardPO extends GameObject{
 		if(side == 0 && onGround == true) {
 		
 			if(opp == 0) {
-				g.drawImage(images[frame/3], x, y , 100, 100, null);
-				g.drawString("Player 1", x + 13, y - 2);
+				g.drawImage(images[frame/3], x, y , width, height, null);
+				g.drawString("Player 1", x + 14, y - 2);
 			}else {
-				g.drawImage(images[frame/3], x, y , -100, 100, null);
-				g.drawString("Player 1", x - 50, y - 2);
+				g.drawImage(images[frame/3], x + width,y , -width, height, null);
+				g.drawString("Player 1", x + 38, y - 2);
 			}
 			
 			frame ++;
@@ -145,11 +143,11 @@ public class WizardPO extends GameObject{
 			
 		}else {
 			if(opp == 0) {
-				g.drawImage(images[frame/3+2], x, y, 100, 100, null);
-				g.drawString("Player 1", x + 13, y - 2);
+				g.drawImage(images[frame/3+2], x, y, width, height, null);
+				g.drawString("Player 1", x + 14, y - 2);
 			}else {
-				g.drawImage(images[frame/3+2], x, y, -100, 100, null);
-				g.drawString("Player 1", x, y - 2);
+				g.drawImage(images[frame/3+2], x + width,y, -width, height, null);
+				g.drawString("Player 1", x + 38, y - 2);
 			}
 			
 			frame ++;
@@ -157,6 +155,9 @@ public class WizardPO extends GameObject{
 				frame = 0;
 			}
 		}
+		
+		g.setColor(Color.RED);
+		g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 	}
 }
 

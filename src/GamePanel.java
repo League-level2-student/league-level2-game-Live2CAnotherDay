@@ -16,10 +16,10 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	Timer timer;
 	ObjectManager oM;
 
-	WizardPO wizard = new WizardPO(100, 650, 50, 50, Color.green);
-	PinkGGPT pinkie = new PinkGGPT(1650, 650, 50, 50, Color.pink);
-	NyanCatObs meowie = new NyanCatObs(-100, -100, 120, 80, Color.blue);
-	TumbleweedObs brownie = new TumbleweedObs(-100, -100, 35, 35, Color.BLACK);
+	WizardPO wizard = new WizardPO(100, 650, 100, 83, Color.green);
+	PinkGGPT pinkie = new PinkGGPT(1650, 650, 100, 83, Color.pink);
+	NyanCatObs meowie = new NyanCatObs(-100, -100, 120, 55, Color.blue);
+	TumbleweedObs brownie = new TumbleweedObs(-100, -100, 55, 55, Color.BLACK);
 	
 	GamePanel(){
 		timer = new Timer(1000/60, this);

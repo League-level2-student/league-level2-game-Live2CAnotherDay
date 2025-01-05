@@ -13,7 +13,7 @@ public class TumbleweedObs extends GameObject{
 	Color color;
 	Random rand = new Random();
 	int frame = 0;
-	int xSpeed = 20;
+	int xSpeed = 5;
 	int ySpeed = 0;
 	int gravity = 1;
 	
@@ -81,11 +81,13 @@ public class TumbleweedObs extends GameObject{
 		// TODO Auto-generated method stub
 		g.setColor(color);
 		//g.fillRect(x, y, width, height);
-		g.drawImage(images[frame],x ,y, 55, 55, null);
+		g.drawImage(images[frame],x ,y, width, height, null);
 		frame ++;
 		if (frame == 8) {
 			frame = 0;
 		}
+		g.setColor(Color.CYAN);
+		g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 	}
 }
 //
