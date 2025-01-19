@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,17 +10,28 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.JOptionPane;
 
 class GamePanel extends JPanel implements KeyListener, ActionListener{
 	
 	JFrame frame = new JFrame();
 	Timer timer;
 	ObjectManager oM;
+	final int MENU = 0;
+	final int GAME = 1; 
+	final int END = 2;
+	int currentState = MENU;
+	Font titleFont;
+	Font normalFont;
 
-	WizardPO wizard = new WizardPO(100, 650, 100, 83, Color.green);
-	PinkGGPT pinkie = new PinkGGPT(1650, 650, 100, 83, Color.pink);
+	WizardPO wizard = new WizardPO(100, 650, 80, 80, Color.green);
+	PinkGGPT pinkie = new PinkGGPT(1650, 650, 80, 80, Color.pink);
 	NyanCatObs meowie = new NyanCatObs(-100, -100, 120, 55, Color.blue);
 	TumbleweedObs brownie = new TumbleweedObs(-100, -100, 55, 55, Color.BLACK);
+	
+	public void startGame() {
+		
+	}
 	
 	GamePanel(){
 		timer = new Timer(1000/60, this);
@@ -33,6 +45,60 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		timer.start();
 	}
 	
+	void updateMenuState() {
+		
+	}
+	
+	void updateGameState() {
+//		objectManager.update();
+//		if(player1.isActive == false) {
+//			currentState = END;
+//			
+//		}
+	}
+	
+	
+	
+	void updateEndState() {
+//		rocketShip.isActive = true;
+	}
+	
+	void drawMenuState(Graphics g) {
+//		g.setColor(Color.BLUE);
+//		g.fillRect(0, 0, JoustMW.WIDTH, JoustMW.HEIGHT);
+//		g.setFont(titleFont);
+//		g.setColor(Color.YELLOW);
+//		g.drawString("League Invaders", 75, 100);
+//		g.setFont(normalFont);
+//		g.drawString("Press ENTER to start", 125, 250);
+//		g.drawString("Press SPACE for instructions", 90, 550);
+	}
+	
+	void drawGameState(Graphics g) {
+		
+//		if (gotImage) {
+//			g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
+//		} else {
+//			g.setColor(Color.BLACK);
+//			g.fillRect(0, 0, JoustMW.WIDTH, JoustMW.HEIGHT);
+//		}
+//		objectManager.draw(g);
+//		String scoreString = "score: " +  objectManager.getScore();
+//		g.setColor(Color.WHITE);
+//		g.drawString(scoreString, 20 , 20);
+	}
+	
+	void drawEndState(Graphics g) {
+//		g.setColor(Color.RED);
+//		g.fillRect(0, 0, JoustMW.WIDTH, JoustMW.HEIGHT);
+//		g.setFont(titleFont);
+//		g.setColor(Color.CYAN);
+//		g.drawString("GAME OVER", 100, 100);
+//		g.setFont(normalFont);
+//		g.drawString("You destroyed " + objectManager.getScore() + " enemies", 125, 250);
+//		g.drawString("Press ENTER to restart", 130, 550);
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		// TODO Auto-generated method stub
@@ -41,6 +107,14 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		pinkie.draw(g);
 		brownie.draw(g);
 		meowie.draw(g);
+		
+		if(currentState == MENU) {
+			drawMenuState(g);
+		}else if(currentState == GAME) {
+			drawGameState(g);
+		}else if(currentState == END) {
+			drawEndState(g);
+		}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -52,11 +126,40 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		meowie.update();
 		oM.update();
 		
+		if(currentState == MENU) {
+			updateMenuState();
+		}else if(currentState == GAME) {
+			updateGameState();
+		}else if(currentState == END) {
+			updateEndState();
+		}
+		//System.out.println("action");
+		repaint();
+		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
+//		if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+//			if(currentState == END) {
+//				currentState = MENU;
+//				rocketShip = new Rocketship(250, 700, 50, 50);
+//				objectManager = new ObjectManager(rocketShip);
+//				
+//			}
+//			else if (currentState == MENU){
+//				currentState = GAME;
+//				startGame();
+//			}else if(currentState == END) {
+//			alienSpawn.stop();
+//		}
+//		
+//		if(currentState == MENU) {
+//			if(arg0.getKeyCode()== KeyEvent.VK_SPACE) {
+//				//System.out.println("Instructions: \n Press the Arrow Keys to move the RocketShip \n Press Space to shoot \n OBJECTIVE: Shoot the Aliens that are attempting to invade earth. \n Tip: Earth has unlimited health bar, so in sticky situations just avoid colliding with the aliens");
+//				JOptionPane.showMessageDialog(null, "Instructions: \n Press the Arrow Keys to move the RocketShip \n Press Space to shoot \n OBJECTIVE: Shoot the Aliens that are attempting to invade earth. \n Tip: Earth has unlimited health bar, so in sticky situations just avoid colliding with the aliens");
+//			}
+//		}
 		
 	}
 

@@ -126,10 +126,10 @@ public class PinkGGPT extends GameObject {
 
 			if (opp == 0) {
 				g.drawImage(images[frame / 3], x, y, width, height, null);
-				g.drawString("Player 2", x + 36, y - 1);
+				g.drawString("Player 2", x + 34, y - 1);
 			} else {
 				g.drawImage(images[frame / 3], x + width, y, -width, height, null);
-				g.drawString("Player 2", x + 14, y - 1);
+				g.drawString("Player 2", x + 10, y - 1);
 			}
 
 			frame++;
@@ -141,10 +141,10 @@ public class PinkGGPT extends GameObject {
 		} else {
 			if (opp == 0) {
 				g.drawImage(images[frame / 3 + 3], x, y, width, height, null);
-				g.drawString("Player 2", x + 36, y - 1);
+				g.drawString("Player 2", x + 34, y - 1);
 			} else {
 				g.drawImage(images[frame / 3 + 3], x + width, y, -width, height, null);
-				g.drawString("Player 2", x + 14, y - 1);
+				g.drawString("Player 2", x + 10, y - 1);
 			}
 
 			frame++;
