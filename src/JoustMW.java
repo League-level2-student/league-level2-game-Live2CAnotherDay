@@ -1,6 +1,7 @@
 public class JoustMW{
 	public static void main(String[] args){
 		GamePanel gamePanel = new GamePanel();
+		
 	}
 }
 

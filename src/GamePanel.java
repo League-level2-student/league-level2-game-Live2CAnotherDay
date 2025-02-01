@@ -6,13 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.awt.Graphics;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.JOptionPane;
 
-class GamePanel extends JPanel implements KeyListener, ActionListener{
+public class GamePanel extends JPanel implements KeyListener, ActionListener{
+	
+	public static BufferedImage[] images = new BufferedImage[3];
 	
 	JFrame frame = new JFrame();
 	Timer timer;
@@ -23,6 +29,8 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	int currentState = MENU;
 	Font titleFont;
 	Font normalFont;
+	int JoustWIDTH = 2000;
+	int JoustHEIGHT = 1000;
 
 	WizardPO wizard = new WizardPO(100, 650, 80, 80, Color.green);
 	PinkGGPT pinkie = new PinkGGPT(1650, 650, 80, 80, Color.pink);
@@ -34,9 +42,10 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	}
 	
 	GamePanel(){
+		titleFont = new Font("Arial", Font.PLAIN, 48);
 		timer = new Timer(1000/60, this);
 		oM = new ObjectManager(wizard, pinkie, meowie, brownie);
-		setPreferredSize(new Dimension(2000, 1000));
+		setPreferredSize(new Dimension(JoustWIDTH, JoustHEIGHT));
 		frame.add(this);
 		frame.pack();
 		frame.addKeyListener(this);
@@ -44,6 +53,23 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		frame.setVisible(true);
 		timer.start();
 	}
+	
+	static {
+		loadImages();
+	}
+	
+	static void loadImages() {
+		
+				
+		try {
+			images[1]= ImageIO.read(GamePanel.class.getResourceAsStream("TitleScreen.gif"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			
+		}
+	}
+		
 	
 	void updateMenuState() {
 		
@@ -64,17 +90,23 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	}
 	
 	void drawMenuState(Graphics g) {
-//		g.setColor(Color.BLUE);
-//		g.fillRect(0, 0, JoustMW.WIDTH, JoustMW.HEIGHT);
-//		g.setFont(titleFont);
-//		g.setColor(Color.YELLOW);
-//		g.drawString("League Invaders", 75, 100);
+		g.setColor(Color.BLUE);
+		loadImages();
+		
+		g.drawImage("TitleScreen.gif", 0, 0, JoustWIDTH, JoustHEIGHT, null);
+		
+		g.setFont(titleFont);
+		g.setColor(Color.RED);
+		g.drawString("JOUST MW", 75, 100);
 //		g.setFont(normalFont);
 //		g.drawString("Press ENTER to start", 125, 250);
 //		g.drawString("Press SPACE for instructions", 90, 550);
 	}
 	
 	void drawGameState(Graphics g) {
+		g.setColor(Color.GREEN);
+		g.fillRect(0,0, 2000, 1000);
+		
 		
 //		if (gotImage) {
 //			g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
@@ -89,8 +121,8 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 	}
 	
 	void drawEndState(Graphics g) {
-//		g.setColor(Color.RED);
-//		g.fillRect(0, 0, JoustMW.WIDTH, JoustMW.HEIGHT);
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, 2000, 1000);
 //		g.setFont(titleFont);
 //		g.setColor(Color.CYAN);
 //		g.drawString("GAME OVER", 100, 100);
@@ -107,6 +139,7 @@ class GamePanel extends JPanel implements KeyListener, ActionListener{
 		pinkie.draw(g);
 		brownie.draw(g);
 		meowie.draw(g);
+
 		
 		if(currentState == MENU) {
 			drawMenuState(g);
