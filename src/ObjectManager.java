@@ -32,6 +32,22 @@ public class ObjectManager implements ActionListener{
 	void update() {
 		if (p1Lives > 0|| p2Lives > 0) {
 			checkCollision();
+			if (p1MikuI > 0) {
+				p1MikuI --;
+			}else if(p1WeedI > 0) {
+				p1WeedI --;
+			}
+
+			if (p2MikuI > 0) {
+				p2MikuI --;
+			}else if(p2WeedI > 0) {
+				p2WeedI --;
+			}
+
+			if(pWait > 0) {
+				pWait --;
+			}
+			
 		}else if (p1Lives <= 0 && p2Lives > 0){
 			System.out.println("p2 won!");
 			return;
@@ -39,26 +55,12 @@ public class ObjectManager implements ActionListener{
 			System.out.println("p1 won!");
 			return;
 		}else {
-			System.out.println("How did both of you guys die???");
+		//	System.out.println("How did both of you guys die???");
 			return;
 		}
 		
 		
-		if (p1MikuI > 0) {
-			p1MikuI --;
-		}else if(p1WeedI > 0) {
-			p1WeedI --;
-		}
 		
-		if (p2MikuI > 0) {
-			p2MikuI --;
-		}else if(p2WeedI > 0) {
-			p2WeedI --;
-		}
-		
-		if(pWait > 0) {
-			pWait --;
-		}
 	}
 	
 	void draw(Graphics g) {

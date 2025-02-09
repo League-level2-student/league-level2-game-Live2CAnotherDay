@@ -8,13 +8,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.awt.Graphics;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.JOptionPane;
 
 public class GamePanel extends JPanel implements KeyListener, ActionListener{
 	
@@ -28,21 +29,32 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
 	final int END = 2;
 	int currentState = MENU;
 	Font titleFont;
-	Font normalFont;
-	int JoustWIDTH = 2000;
-	int JoustHEIGHT = 1000;
+	Font papyrusFont;
+	Font miniPappyFont;
+	int JoustWIDTH = 1200;
+	int JoustHEIGHT = 700;
 
 	WizardPO wizard = new WizardPO(100, 650, 80, 80, Color.green);
 	PinkGGPT pinkie = new PinkGGPT(1650, 650, 80, 80, Color.pink);
 	NyanCatObs meowie = new NyanCatObs(-100, -100, 120, 55, Color.blue);
 	TumbleweedObs brownie = new TumbleweedObs(-100, -100, 55, 55, Color.BLACK);
 	
+	
+    private ImageIcon gifIcon;
+	
 	public void startGame() {
 		
 	}
 	
 	GamePanel(){
-		titleFont = new Font("Arial", Font.PLAIN, 48);
+		
+		 URL gifUrl = getClass().getResource("TitleScreen.gif"); // Change the path to your GIF file
+	     gifIcon = new ImageIcon(gifUrl);
+		
+		
+		titleFont = new Font("kokonor", Font.PLAIN, 48);
+		papyrusFont = new Font("papyrus", Font.PLAIN, 25);
+		miniPappyFont = new Font("papyrus", Font.PLAIN, 20);
 		timer = new Timer(1000/60, this);
 		oM = new ObjectManager(wizard, pinkie, meowie, brownie);
 		setPreferredSize(new Dimension(JoustWIDTH, JoustHEIGHT));
@@ -93,11 +105,17 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
 		g.setColor(Color.BLUE);
 		loadImages();
 		
-		g.drawImage("TitleScreen.gif", 0, 0, JoustWIDTH, JoustHEIGHT, null);
+		//g.drawImage("TitleScreen.gif", 0, 0, JoustWIDTH, JoustHEIGHT, null);
+		
+		gifIcon.paintIcon(this, g, 0, 0); // Draw at position (0, 0)
 		
 		g.setFont(titleFont);
-		g.setColor(Color.RED);
-		g.drawString("JOUST MW", 75, 100);
+		g.setColor(Color.white);
+		g.drawString("JOUST MW", 35, 75);
+		g.setFont(papyrusFont);
+		g.drawString("Press X to start the Game", 845, 650);
+		g.setFont(miniPappyFont);
+		g.drawString("Press T or Click for TIPS", 875, 600);
 //		g.setFont(normalFont);
 //		g.drawString("Press ENTER to start", 125, 250);
 //		g.drawString("Press SPACE for instructions", 90, 550);
@@ -222,6 +240,15 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
 			pinkie.dCounter++;
 		}
 		
+		if(e.getExtendedKeyCode() == KeyEvent.VK_T && currentState == MENU) {
+			JOptionPane.showMessageDialog(frame, "Player 1 is the wizard, Player 2 is the pink girl \n"
+					+ "In order to win, make sure that your opponent dies first before you do! \n"
+					+ "Crashing into obstalces or entities will cause player to lose hp \n"
+					+ "To dmg your opponent, collide with them. When colliding, if the player is higher, than they deal double dmg. \n"
+					+ "Staying still will not end well. \n"
+					+ "Jolly Jousting! :p");
+		}
+		
 	}
 
 	@Override
@@ -237,6 +264,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
 		}
 
 	}
+	
 	
 	
 }
