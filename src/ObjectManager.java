@@ -15,12 +15,14 @@ public class ObjectManager implements ActionListener{
 	int p2MikuI = 0;
 	int p2WeedI = 0;
 	int pWait = 0;
+	int endScore;
+	int score = 0;
 	
-//	public int getScore() {
-//		
-//		endScore = score;
-//		return endScore;
-//	}
+	public int getScore() {
+		
+		endScore = score;
+		return endScore;
+	}
 
 	public ObjectManager(WizardPO wizard, PinkGGPT pinkie, NyanCatObs meowie, TumbleweedObs brownie){
 		this.wizard = wizard;

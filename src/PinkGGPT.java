@@ -61,8 +61,8 @@ public class PinkGGPT extends GameObject {
 	public void update() {
 
 		// Boundaries//
-		if (y > 850) {
-			y = 849;
+		if (y > 580) {
+			y = 579;
 			onGround = true;
 
 		}
@@ -76,10 +76,10 @@ public class PinkGGPT extends GameObject {
 			y = 0;
 		}
 
-		if (x < 150) {
-			x = 151;
-		} else if (x > 1850) {
-			x = 1849;
+		if (x < 180) {
+			x = 181;
+		} else if (x > 1084) {
+			x = 1083;
 		}
 
 		super.update();
