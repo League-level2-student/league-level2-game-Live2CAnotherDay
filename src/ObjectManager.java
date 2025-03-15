@@ -32,8 +32,9 @@ public class ObjectManager implements ActionListener{
 	}
 	
 	void update() {
-		if (p1Lives > 0|| p2Lives > 0) {
-			checkCollision();
+		checkCollision();
+		if (p1Lives > 0 && p2Lives > 0) {
+			
 			if (p1MikuI > 0) {
 				p1MikuI --;
 			}else if(p1WeedI > 0) {
@@ -52,12 +53,15 @@ public class ObjectManager implements ActionListener{
 			
 		}else if (p1Lives <= 0 && p2Lives > 0){
 			System.out.println("p2 won!");
+			GamePanel.currentState = GamePanel.END;
 			return;
 		}else if(p2Lives <= 0 && p1Lives > 0 ){
 			System.out.println("p1 won!");
+			GamePanel.currentState = GamePanel.END;
 			return;
 		}else {
-		//	System.out.println("How did both of you guys die???");
+			System.out.println("How did both of you guys die???");
+			GamePanel.currentState = GamePanel.END;
 			return;
 		}
 		

@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -25,10 +27,10 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     JFrame frame = new JFrame();
     Timer timer;
     ObjectManager oM;
-    final int MENU = 0;
-    final int GAME = 1;
-    final int END = 2;
-    int currentState = MENU;
+    static final int MENU = 0;
+    static final int GAME = 1;
+    static final int END = 2;
+    static int currentState = MENU;
     Font titleFont;
     Font papyrusFont;
     Font miniPappyFont;
@@ -37,11 +39,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
     WizardPO wizard = new WizardPO(200, 300, 80, 80, Color.green);
     PinkGGPT pinkie = new PinkGGPT(1070, 300, 80, 80, Color.pink);
-    NyanCatObs meowie = new NyanCatObs(-100, -100, 130, 55, Color.blue);
+    NyanCatObs meowie = new NyanCatObs( -100, new Random().nextInt(250), 130, 55, Color.blue);
     TumbleweedObs brownie = new TumbleweedObs(-100, -100, 55, 55, Color.BLACK);
 
     private ImageIcon gifIcon; // Title screen GIF
     private ImageIcon gifIcon2; // Game screen GIF
+    private ImageIcon gifIcon3;
 
     // Coordinates and dimensions for the clickable text
     private int tipsTextX = 875;
@@ -60,6 +63,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         gifIcon = new ImageIcon(gifUrl);
         URL gifUrl2 = getClass().getResource("GameScreen.gif");
         gifIcon2 = new ImageIcon(gifUrl2);
+        URL gifUrl3 = getClass().getResource("EndScreen.gif");
+        gifIcon3 = new ImageIcon(gifUrl3);
         
         oM = new ObjectManager(wizard, pinkie, meowie, brownie);
         titleFont = new Font("kokonor", Font.PLAIN, 48);
@@ -86,30 +91,23 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         });
     }
 
-//    static {
-//        loadImages();
-//    }
-
-    // Load only two images (Title and Game screen)
-//    static void loadImages() {
-//        try {
-//            images[0] = ImageIO.read(GamePanel.class.getResourceAsStream("TitleScreen.gif"));
-//            images[1] = ImageIO.read(GamePanel.class.getResourceAsStream("GameScreen.gif"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     void updateMenuState() {
         // Implement any menu-specific updates here
     }
 
     void updateGameState() {
         // Implement any game-specific updates here
+    	   wizard.update();
+           pinkie.update();
+           brownie.update();
+           meowie.update();
+           oM.update();
     }
 
     void updateEndState() {
         // Implement end game state updates here
+    	setPreferredSize(new Dimension(1900, 1000));
+    	frame.pack();
     }
 
     void drawMenuState(Graphics g) {
@@ -128,16 +126,23 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
     void drawGameState(Graphics g) {
 //    	g.setColor(Color.GREEN);
-    	g.setColor(Color.GREEN.darker().darker().darker().darker().darker().darker().darker());
         g.fillRect(0, 0, 2000, 1000);
         gifIcon2.paintIcon(this, g, 0, 0);  // Draw game screen GIF
         
-          // Fill background with green (just an example)
+        
+        
+          
     }
 
     void drawEndState(Graphics g) {
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK.brighter());
         g.fillRect(0, 0, 2000, 1000);  // End game screen with red background
+        
+        gifIcon3.paintIcon(this, g, 0, 0);
+        
+        g.setFont(titleFont);
+        g.setColor(Color.red.darker());
+        g.drawString("Player won!", 400, 100);
     }
 
     @Override
@@ -148,7 +153,6 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         if (currentState == MENU) {
             drawMenuState(g);
         } else if (currentState == GAME) {
-        	
             drawGameState(g);
             wizard.draw(g);
             pinkie.draw(g);
@@ -164,11 +168,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.repaint();
-        wizard.update();
-        pinkie.update();
-        brownie.update();
-        meowie.update();
-        oM.update();
+     
 
         if (currentState == MENU) {
             updateMenuState();

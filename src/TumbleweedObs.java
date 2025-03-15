@@ -50,10 +50,10 @@ public class TumbleweedObs extends GameObject{
 			respawn();
 		}
 		
-		if(y < 885){
+		if(y < 615){
 			y += ySpeed;
 			ySpeed += gravity;
-		}else if(y >= 885) {			
+		}else if(y >= 615) {			
 			ySpeed = -25;
 			y += ySpeed;
 		}
