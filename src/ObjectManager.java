@@ -1,7 +1,10 @@
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 public class ObjectManager implements ActionListener{
 	WizardPO wizard;
@@ -17,6 +20,11 @@ public class ObjectManager implements ActionListener{
 	int pWait = 0;
 	int endScore;
 	int score = 0;
+	static int winner = 0;
+	private ImageIcon heart;
+	private ImageIcon deadHeart;
+	ImageIcon[] p1;
+	ImageIcon[] p2;
 	
 	public int getScore() {
 		
@@ -29,6 +37,14 @@ public class ObjectManager implements ActionListener{
 		this.pinkie = pinkie;
 		this.meowie = meowie;
 		this.brownie = brownie;
+		URL bheartURL = getClass().getResource("Heart.gif");
+        heart = new ImageIcon(bheartURL);
+        URL dHeartURL = getClass().getResource("DeadHeart.gif");
+        deadHeart = new ImageIcon(dHeartURL);
+        
+        p1 = new ImageIcon[4];
+        p2 = new ImageIcon[4];
+        
 	}
 	
 	void update() {
@@ -53,10 +69,12 @@ public class ObjectManager implements ActionListener{
 			
 		}else if (p1Lives <= 0 && p2Lives > 0){
 			System.out.println("p2 won!");
+			winner = 2;
 			GamePanel.currentState = GamePanel.END;
 			return;
 		}else if(p2Lives <= 0 && p1Lives > 0 ){
 			System.out.println("p1 won!");
+			winner = 1;
 			GamePanel.currentState = GamePanel.END;
 			return;
 		}else {
@@ -70,9 +88,13 @@ public class ObjectManager implements ActionListener{
 	}
 	
 	void draw(Graphics g) {
-		wizard.draw(g);
-		pinkie.draw(g);
+		//wizard.draw(g);
+		//pinkie.draw(g);
+		heart.paintIcon(null, g, 0, 20);
+		
+		//deadHeart.paintIcon(null, g, 0, 0);
 	}
+	
 	
 	void checkCollision() {
 		if(p1MikuI == 0 && wizard.collisionBox.intersects(meowie.collisionBox)) {

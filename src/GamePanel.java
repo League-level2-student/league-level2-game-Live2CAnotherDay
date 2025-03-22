@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     Font titleFont;
     Font papyrusFont;
     Font miniPappyFont;
+    Font endFont;
     int JoustWIDTH = 1200;
     int JoustHEIGHT = 700;
 
@@ -51,13 +52,24 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     private int tipsTextY = 600;
     private int tipsTextWidth = 250;  // Width of the clickable area
     private int tipsTextHeight = 25;  // Height of the clickable area
-
+    
+    private int againTextX = 1590;
+    private int againTextY = 865;
+    private int againTextWidth = 310;  // Width of the clickable area
+    private int againTextHeight = 25;
+    
     public void startGame() {
         // Initialize the game here (e.g., spawn objects, set game variables)
         
     }
+    private static GamePanel instance = null;
 
+    public static GamePanel getInstance() {
+    	return instance;
+    }
+    
     GamePanel() {
+    	instance = this;
         // Load GIFs for the title screen and game screen
         URL gifUrl = getClass().getResource("TitleScreen.gif");
         gifIcon = new ImageIcon(gifUrl);
@@ -66,10 +78,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         URL gifUrl3 = getClass().getResource("EndScreen.gif");
         gifIcon3 = new ImageIcon(gifUrl3);
         
+        
         oM = new ObjectManager(wizard, pinkie, meowie, brownie);
         titleFont = new Font("kokonor", Font.PLAIN, 48);
         papyrusFont = new Font("papyrus", Font.PLAIN, 25);
         miniPappyFont = new Font("papyrus", Font.PLAIN, 20);
+        endFont = new Font("Bradley Hand", Font.BOLD, 75);
         timer = new Timer(1000 / 60, this);
         setPreferredSize(new Dimension(JoustWIDTH, JoustHEIGHT));
         frame.add(this);
@@ -87,6 +101,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
                 if (currentState == MENU && isInsideTipsText(e.getX(), e.getY())) {
                     showTips();
                 }
+                
+                if(currentState == END && isInsideAgainText(e.getX(), e.getY())) {
+                    currentState = GAME;
+                    oM.p1Lives = 5;
+                    oM.p2Lives = 5;
+                }
             }
         });
     }
@@ -97,11 +117,13 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
     void updateGameState() {
         // Implement any game-specific updates here
-    	   wizard.update();
-           pinkie.update();
-           brownie.update();
-           meowie.update();
-           oM.update();
+//    	setPreferredSize(new Dimension(1200, 700));
+//    	frame.pack();
+    	wizard.update();
+        pinkie.update();
+        brownie.update();
+        meowie.update();
+        oM.update();
     }
 
     void updateEndState() {
@@ -128,10 +150,13 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 //    	g.setColor(Color.GREEN);
         g.fillRect(0, 0, 2000, 1000);
         gifIcon2.paintIcon(this, g, 0, 0);  // Draw game screen GIF
+       
         
-        
-        
-          
+        wizard.draw(g);
+        pinkie.draw(g);
+        brownie.draw(g);
+        meowie.draw(g);
+        oM.draw(g);
     }
 
     void drawEndState(Graphics g) {
@@ -140,9 +165,22 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         
         gifIcon3.paintIcon(this, g, 0, 0);
         
-        g.setFont(titleFont);
-        g.setColor(Color.red.darker());
-        g.drawString("Player won!", 400, 100);
+        g.setFont(endFont);
+        g.setColor(Color.WHITE);
+        //g.setColor(Color.red.darker());
+        if (ObjectManager.winner == 0) {
+        	g.drawString("Both Jousters lost", 400, 100);
+        }else if(ObjectManager.winner == 1) {
+        	g.drawString("The Wizard won the Joust!", 400, 100);
+        }else {
+        	g.drawString("The Pink GG won the Joust!", 400, 100);
+        }
+        
+        g.setFont(miniPappyFont);
+        g.drawString("Press M to go back to Menu", 1630, 890);
+        g.drawString("Press G or Click Me to play again", againTextX, againTextY);
+        
+        
     }
 
     @Override
@@ -154,10 +192,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
             drawMenuState(g);
         } else if (currentState == GAME) {
             drawGameState(g);
-            wizard.draw(g);
-            pinkie.draw(g);
-            brownie.draw(g);
-            meowie.draw(g);
+           
         } else if (currentState == END) {
             drawEndState(g);
         }
@@ -186,9 +221,19 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
             if (currentState == MENU) {
                 currentState = GAME;  // Start the game when X is pressed in the menu
                 startGame();  // Initialize the game
-            } else if (currentState == END) {
-                currentState = MENU;  // Return to the menu after game over
             }
+        }
+        
+        if (e.getKeyCode() == KeyEvent.VK_G) {
+            if (currentState == END) {
+                currentState = GAME;  // Start the game when X is pressed in the menu
+                startGame();  // Initialize the game
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_M) {
+            if (currentState == END) {
+                currentState = MENU;  // Start the game when X is pressed in the menu
+            }    
         }
     }
 
@@ -262,5 +307,10 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     private boolean isInsideTipsText(int mouseX, int mouseY) {
         return mouseX >= tipsTextX && mouseX <= tipsTextX + tipsTextWidth
                 && mouseY >= tipsTextY - tipsTextHeight && mouseY <= tipsTextY;
+    }
+    
+    private boolean isInsideAgainText(int mouseX, int mouseY) {
+        return mouseX >= againTextX && mouseX <= againTextX + againTextWidth
+                && mouseY >= againTextY - againTextHeight && mouseY <= againTextY;
     }
 }

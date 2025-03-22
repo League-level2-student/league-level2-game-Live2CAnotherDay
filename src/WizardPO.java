@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 //import java.awt.Color;
 //import java.awt.Graphics;
@@ -24,6 +25,9 @@ public class WizardPO extends GameObject{
 	Color color;
 	private boolean onGround = false;
 	private boolean jumpE = true;
+	
+	
+	
 	
 	static {
 		loadImages();
