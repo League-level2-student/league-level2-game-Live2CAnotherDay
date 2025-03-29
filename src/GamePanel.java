@@ -29,7 +29,9 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     ObjectManager oM;
     static final int MENU = 0;
     static final int GAME = 1;
-    static final int END = 2;
+    static final int PURGATORY = 2;
+    static final int END = 3;
+    
     static int currentState = MENU;
     Font titleFont;
     Font papyrusFont;
@@ -46,6 +48,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     private ImageIcon gifIcon; // Title screen GIF
     private ImageIcon gifIcon2; // Game screen GIF
     private ImageIcon gifIcon3;
+    private ImageIcon gifIcon4;
 
     // Coordinates and dimensions for the clickable text
     private int tipsTextX = 875;
@@ -77,6 +80,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         gifIcon2 = new ImageIcon(gifUrl2);
         URL gifUrl3 = getClass().getResource("EndScreen.gif");
         gifIcon3 = new ImageIcon(gifUrl3);
+        URL gifURL4 = getClass().getResource("LastHeart.gif");
+        gifIcon4 = new ImageIcon(gifURL4);
         
         
         oM = new ObjectManager(wizard, pinkie, meowie, brownie);
@@ -131,6 +136,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     	setPreferredSize(new Dimension(1900, 1000));
     	frame.pack();
     }
+    
 
     void drawMenuState(Graphics g) {
         g.setColor(Color.BLUE);
@@ -144,6 +150,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         g.drawString("Press X to start the Game", 845, 650);
         g.setFont(miniPappyFont);
         g.drawString("Press T or Click for TIPS", tipsTextX, tipsTextY);
+    }
+    
+    void drawPurgatoryState(Graphics g){
+    	setPreferredSize(new Dimension(400, 400));
+    	gifIcon4.paintIcon(this, g, 0, 0);
+    	frame.pack();
     }
 
     void drawGameState(Graphics g) {
@@ -193,7 +205,10 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         } else if (currentState == GAME) {
             drawGameState(g);
            
-        } else if (currentState == END) {
+        } else if (currentState == PURGATORY){
+        	drawPurgatoryState(g);
+        }
+    	else if (currentState == END) {
             drawEndState(g);
         }
         
@@ -209,7 +224,9 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
             updateMenuState();
         } else if (currentState == GAME) {
             updateGameState();
-        } else if (currentState == END) {
+        } else if(currentState == PURGATORY){
+        	
+        }else if (currentState == END) {
             updateEndState();
         }
         repaint();
