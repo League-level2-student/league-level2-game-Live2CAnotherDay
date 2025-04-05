@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,16 +81,22 @@ public class ObjectManager implements ActionListener{
 		}else if (p1Lives <= 0 && p2Lives > 0){
 			System.out.println("p2 won!");
 			winner = 2;
-			GamePanel.currentState = GamePanel.END;
+			GamePanel.currentState = GamePanel.PURGATORY;
+			GamePanel.getInstance().setPreferredSize(new Dimension(400, 400));
+			GamePanel.getInstance().frame.pack();
 			return;
 		}else if(p2Lives <= 0 && p1Lives > 0 ){
 			System.out.println("p1 won!");
 			winner = 1;
-			GamePanel.currentState = GamePanel.END;
+			GamePanel.currentState = GamePanel.PURGATORY;
+			GamePanel.getInstance().setPreferredSize(new Dimension(400, 400));
+			GamePanel.getInstance().frame.pack();
 			return;
 		}else {
 			System.out.println("How did both of you guys die???");
-			GamePanel.currentState = GamePanel.END;
+			GamePanel.currentState = GamePanel.PURGATORY;
+			GamePanel.getInstance().setPreferredSize(new Dimension(400, 400));
+			GamePanel.getInstance().frame.pack();
 			return;
 		}
 
@@ -171,7 +178,11 @@ public class ObjectManager implements ActionListener{
 
 		if(pWait == 0 && wizard.collisionBox.intersects(pinkie.collisionBox)) {
 			if(wizard.collisionBox.getY() < pinkie.collisionBox.getY()) {
-				p2Lives = p2Lives - 2;
+				if (p2Lives  == 1) {
+					p2Lives = p2Lives -1;
+				}else {
+					p2Lives = p2Lives - 2;
+				}
 				p2Breaking = true;
 				p2[p2Lives] = deadHeart;
 				System.out.println("p1 crited p2!");
@@ -180,15 +191,20 @@ public class ObjectManager implements ActionListener{
 				p1Lives = p1Lives - 1;
 				p1Breaking = true;
 				p1[p1Lives] = deadHeart;
+				
 				p2Lives = p2Lives - 1;
 				p2Breaking = true;
 				p2[p2Lives] = deadHeart;
 				System.out.println("an eye for an eye");
 				pWait = 120;
 			}else {
-				p1Lives = p1Lives - 2;
+				if (p1Lives  == 1) {
+					p1Lives = p1Lives -1;
+				}else {
+					p1Lives = p1Lives - 2;
+				}
 				p1Breaking = true;
-				p1[p2Lives] = deadHeart;
+				p1[p1Lives] = deadHeart;
 				System.out.println("p2 crited p1!");
 				pWait = 180;
 			}

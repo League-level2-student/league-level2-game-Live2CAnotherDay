@@ -108,9 +108,13 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
                 }
                 
                 if(currentState == END && isInsideAgainText(e.getX(), e.getY())) {
-                    currentState = GAME;
-                    oM.p1Lives = 5;
-                    oM.p2Lives = 5;
+                	setPreferredSize(new Dimension(1400, 788));
+        			frame.pack();
+                	currentState = GAME;
+                    oM.p1Lives = 4;
+                    oM.p2Lives = 4;
+                    wizard = new WizardPO(200, 300, 80, 80, Color.green);
+                    pinkie = new PinkGGPT(1070, 300, 80, 80, Color.pink);
                 }
             }
         });
@@ -129,6 +133,10 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         brownie.update();
         meowie.update();
         oM.update();
+    }
+    
+    void updatePurgatoryState(){
+    	
     }
 
     void updateEndState() {
@@ -152,10 +160,15 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         g.drawString("Press T or Click for TIPS", tipsTextX, tipsTextY);
     }
     
+    int purgatoryFrame = 0;
+    
     void drawPurgatoryState(Graphics g){
-    	setPreferredSize(new Dimension(400, 400));
     	gifIcon4.paintIcon(this, g, 0, 0);
-    	frame.pack();
+    	if(purgatoryFrame == 660) {
+    		currentState = END;
+    	}else {
+    		purgatoryFrame += 1;
+    	}
     }
 
     void drawGameState(Graphics g) {
@@ -225,7 +238,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         } else if (currentState == GAME) {
             updateGameState();
         } else if(currentState == PURGATORY){
-        	
+        	updatePurgatoryState();
         }else if (currentState == END) {
             updateEndState();
         }
@@ -241,15 +254,21 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
             }
         }
         
-        if (e.getKeyCode() == KeyEvent.VK_G) {
+        if (e.getExtendedKeyCode() == KeyEvent.VK_G) {
             if (currentState == END) {
-                currentState = GAME;  // Start the game when X is pressed in the menu
+            	setPreferredSize(new Dimension(1400, 788));
+    			frame.pack();
+    			oM.p1Lives = 4;
+                oM.p2Lives = 4;
+            	currentState = GAME;  // Start the game when X is pressed in the menu
                 startGame();  // Initialize the game
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_M) {
+        if (e.getExtendedKeyCode() == KeyEvent.VK_M) {
             if (currentState == END) {
-                currentState = MENU;  // Start the game when X is pressed in the menu
+            	setPreferredSize(new Dimension(1200, 700));
+    			frame.pack();
+                currentState = MENU;  
             }    
         }
     }
