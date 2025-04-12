@@ -117,7 +117,7 @@ public class PinkGGPT extends GameObject {
 		// TODO Auto-generated method stub
 
 		g.setColor(Color.black);
-		g.drawRect(x, y, 1, 20);
+		//g.drawRect(x, y, 1, 20);
 
 		g.setColor(color);
 
@@ -153,6 +153,6 @@ public class PinkGGPT extends GameObject {
 			}
 		}
 		g.setColor(Color.RED);
-		g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
+		//g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 	}
 }

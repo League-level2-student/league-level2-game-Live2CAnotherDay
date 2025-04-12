@@ -81,20 +81,26 @@ public class ObjectManager implements ActionListener{
 		}else if (p1Lives <= 0 && p2Lives > 0){
 			System.out.println("p2 won!");
 			winner = 2;
+			GamePanel.getInstance().reloadHeartGifPurgatory();
 			GamePanel.currentState = GamePanel.PURGATORY;
+			
 			GamePanel.getInstance().setPreferredSize(new Dimension(400, 400));
 			GamePanel.getInstance().frame.pack();
 			return;
 		}else if(p2Lives <= 0 && p1Lives > 0 ){
 			System.out.println("p1 won!");
-			winner = 1;
+			winner = 1;	
+			GamePanel.getInstance().reloadHeartGifPurgatory();
 			GamePanel.currentState = GamePanel.PURGATORY;
+		
 			GamePanel.getInstance().setPreferredSize(new Dimension(400, 400));
 			GamePanel.getInstance().frame.pack();
 			return;
 		}else {
 			System.out.println("How did both of you guys die???");
+			GamePanel.getInstance().reloadHeartGifPurgatory();
 			GamePanel.currentState = GamePanel.PURGATORY;
+			
 			GamePanel.getInstance().setPreferredSize(new Dimension(400, 400));
 			GamePanel.getInstance().frame.pack();
 			return;

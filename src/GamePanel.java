@@ -63,8 +63,20 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     
     public void startGame() {
         // Initialize the game here (e.g., spawn objects, set game variables)
-        
+    	wizard = new WizardPO(200, 300, 80, 80, Color.green);
+        pinkie = new PinkGGPT(1070, 300, 80, 80, Color.pink);
+        meowie = new NyanCatObs( -100, new Random().nextInt(250), 130, 55, Color.blue);
+        brownie = new TumbleweedObs(-100, -100, 55, 55, Color.BLACK);
+        oM = new ObjectManager(wizard, pinkie, meowie, brownie);
+        oM.p1Lives = 4;
+        oM.p2Lives = 4;
+    //    reloadHeartGifPurgatory();
     }
+
+	public void reloadHeartGifPurgatory() {
+		URL gifURL4 = getClass().getResource("LastHeart.gif");
+        gifIcon4 = new ImageIcon(gifURL4);
+	}
     private static GamePanel instance = null;
 
     public static GamePanel getInstance() {
@@ -111,10 +123,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
                 	setPreferredSize(new Dimension(1400, 788));
         			frame.pack();
                 	currentState = GAME;
-                    oM.p1Lives = 4;
-                    oM.p2Lives = 4;
-                    wizard = new WizardPO(200, 300, 80, 80, Color.green);
-                    pinkie = new PinkGGPT(1070, 300, 80, 80, Color.pink);
+                    startGame(); 
+                    
                 }
             }
         });
@@ -141,8 +151,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
     void updateEndState() {
         // Implement end game state updates here
-    	setPreferredSize(new Dimension(1900, 1000));
-    	frame.pack();
+    	
     }
     
 
@@ -165,7 +174,11 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     void drawPurgatoryState(Graphics g){
     	gifIcon4.paintIcon(this, g, 0, 0);
     	if(purgatoryFrame == 660) {
+    		setPreferredSize(new Dimension(1900, 1000));
+        	frame.pack();
+        	purgatoryFrame = 0;
     		currentState = END;
+    		
     	}else {
     		purgatoryFrame += 1;
     	}
@@ -242,7 +255,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         }else if (currentState == END) {
             updateEndState();
         }
-        repaint();
+
     }
 
     @Override
@@ -258,8 +271,6 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
             if (currentState == END) {
             	setPreferredSize(new Dimension(1400, 788));
     			frame.pack();
-    			oM.p1Lives = 4;
-                oM.p2Lives = 4;
             	currentState = GAME;  // Start the game when X is pressed in the menu
                 startGame();  // Initialize the game
             }
@@ -307,6 +318,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     	   setPreferredSize(new Dimension(JoustWIDTH, JoustHEIGHT));
     	   frame.pack();
     	   currentState = GAME;
+    	   startGame();
     	   
        }
         

@@ -87,7 +87,7 @@ public class TumbleweedObs extends GameObject{
 			frame = 0;
 		}
 		g.setColor(Color.CYAN);
-		g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
+		//g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 	}
 }
 //
